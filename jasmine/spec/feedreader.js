@@ -26,33 +26,50 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
+        it('url are defined', function() {
+            for(let i = 0; i < allFeeds.length; i++) {
+                expect(allFeeds[i].url).toBeDefined();
+                expect(allFeeds[i].url).not.toBe("");
+            }
+        });
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
-
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
+        it('names are defined', function() {
+            for(let i = 0; i < allFeeds.length; i++) {
+                expect(allFeeds[i].name).toBeDefined();
+                expect(allFeeds[i].name).not.toBe("");
+            }
+        });
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    describe('The menu', function() {
+        let menu_link=$(".menu-icon-link");
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+        it('is hidden', function() {
+            expect($("body[class='menu-hidden']").length).not.toBe(0);
+        });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+        it('change "hidden" state', function() {
+            for(let i = 0; i < 2; i++)
+            {
+              menu_link.click();
+              expect($("body[class='menu-hidden']").length).toBe(i);
+            }
+        });
+    });
+
+
+    describe('Initial Entries', function() {
+        beforeEach(function(done) {
+            loadFeed(0);
+            done();
+        });
+
+        it('is hidden', function() {
+            expect($(".feed").length).toBe(1);
+        });
+        // DA CONTROLLARE ANCORA
+    });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
