@@ -80,6 +80,22 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+
+    describe('New Feed Selection', function() {
+      let old_feed = $(".feed");
+      beforeEach(function(done) {
+          loadFeed(0);
+          done();
+      });
+
+      it('is hidden', function() {
+        console.log(old_feed);
+          console.log($(".feed"));
+          expect(old_feed).not.toBe($(".feed"));
+      });
+       // DA CONTROLLARE ANCORA
+    });
+
     /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
