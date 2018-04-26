@@ -47,7 +47,7 @@ $(function() {
 
     /* A test suite for the menu */
     describe('The menu', function() {
-        let menu_link = $(".menu-icon-link");
+        const menu_link = $(".menu-icon-link");
         /* This test that the menu element is hidden by default. */
         it('is hidden', function() {
             expect($("body[class='menu-hidden']").length).not.toBe(0);
@@ -67,7 +67,7 @@ $(function() {
     /* A test suite for check if loadFeed load something */
     describe('Initial Entries', function() {
         beforeEach(function(done) {
-            loadFeed(0, function () { done(); });
+            loadFeed(0, function() { done(); });
         });
         /* This test ensures when the loadFeed function is
          * called and completes its work, there is at least
@@ -82,7 +82,7 @@ $(function() {
     describe('New Feed Selection', function() {
         const old_feed = $(".feed").html();
         beforeEach(function(done) {
-            loadFeed(1, function () { done(); });
+            loadFeed(0, function() { done(); });
         });
         /* This test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
