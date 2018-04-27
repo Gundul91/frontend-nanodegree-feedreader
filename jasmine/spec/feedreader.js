@@ -50,17 +50,16 @@ $(function() {
         const menu_link = $(".menu-icon-link");
         /* This test that the menu element is hidden by default. */
         it('is hidden', function() {
-            expect($("body[class='menu-hidden']").length).not.toBe(0);
+            expect($("body").hasClass("menu-hidden")).toBe(true);
         });
         /* This test that the menu changes
          * visibility when the menu icon is clicked.
          */
         it('change "hidden" state', function() {
-            for(let i = 0; i < 2; i++)
-            {
-                menu_link.click();
-                expect($("body[class='menu-hidden']").length).toBe(i);
-            }
+            menu_link.click();
+            expect($("body").hasClass("menu-hidden")).toBe(false);
+            menu_link.click();
+            expect($("body").hasClass("menu-hidden")).toBe(true);
         });
     });
 
@@ -74,21 +73,27 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         it('add at least a .entity', function() {
-            expect($(".feed .entry").length).not.toBeLessThan(0);
+            expect($(".feed").find(".entry").length).toBeGreaterThan(0);
         });
     });
 
     /* A test suite for check if feed loaded add content to the page */
     describe('New Feed Selection', function() {
-        const old_feed = $(".feed").html();
+        let old_feed, new_feed;
         beforeEach(function(done) {
-            loadFeed(0, function() { done(); });
+            loadFeed(0, function() {
+                old_feed = $(".feed").html();
+                loadFeed(1, function() {
+                    new_feed = $(".feed").html();
+                    done();
+                });
+            });
         });
         /* This test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
         it('change the content', function() {
-            expect(old_feed).not.toBe($(".feed").html());
+            expect(old_feed).not.toBe(new_feed);
         });
     });
 }());
